@@ -43,10 +43,19 @@
                                     <action selector="recordBtnAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="tO2-he-08t"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="今天已记录" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vI4-Vc-hXq">
+                                <rect key="frame" x="16" y="294" width="343" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="vI4-Vc-hXq" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="8CO-me-PKs"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="vI4-Vc-hXq" secondAttribute="trailing" id="Dr3-QO-QlL"/>
                             <constraint firstItem="rdp-4u-mGr" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="MMD-C9-R1A"/>
+                            <constraint firstItem="vI4-Vc-hXq" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="230" id="OZv-77-6kG"/>
                             <constraint firstItem="52p-uc-w0H" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="10" id="fkU-uA-gOQ"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="rdp-4u-mGr" secondAttribute="bottom" constant="64" id="hb1-4m-HSH"/>
                             <constraint firstItem="52p-uc-w0H" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="64" id="ih2-Nr-kpF"/>
@@ -55,6 +64,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="记录" id="6ZC-x9-M0Q"/>
                     <connections>
+                        <outlet property="hitLabel" destination="vI4-Vc-hXq" id="gpM-yH-lDx"/>
                         <outlet property="recordBtn" destination="rdp-4u-mGr" id="1xd-nT-UE8"/>
                         <outlet property="recordLabel" destination="52p-uc-w0H" id="bY2-ks-NS3"/>
                     </connections>
