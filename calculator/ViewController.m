@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "SettingViewController.h"
 
 #define RECORD_COUNT        @"RECORD_COUNT"
 #define LAST_RECORD_DATE    @"LAST_RECORD_DATE"
@@ -26,12 +27,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(configUI) name:UIApplicationDidBecomeActiveNotification object:nil];
+    UIBarButtonItem *barBtn = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Home_item_icon.png"] style:UIBarButtonItemStylePlain target:self action:@selector(pushSettingVC)];
+    self.navigationItem.rightBarButtonItem = barBtn;
+    
     NSNumber *count = [[NSUserDefaults standardUserDefaults] objectForKey:RECORD_COUNT];
     self.recordCount = (count != nil) ? count.integerValue : 0;
     self.lastRecordDate = [[NSUserDefaults standardUserDefaults] objectForKey:LAST_RECORD_DATE];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(configUI) name:UIApplicationDidBecomeActiveNotification object:nil];
-    
+    self.recordBtn.layer.cornerRadius = self.recordBtn.bounds.size.height / 2;
+    self.recordBtn.layer.masksToBounds = YES;
     [self configUI];
 }
 
@@ -40,13 +45,12 @@
 }
 
 - (void)configUI{
-    self.recordBtn.layer.cornerRadius = self.recordBtn.bounds.size.height / 2;
-    self.recordBtn.layer.masksToBounds = YES;
+
     self.recordLabel.attributedText = [self recordAttributedString];
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     dateFormatter.dateFormat = @"yyyy-MM-dd";
-    NSString *lastRecordString =  [dateFormatter stringFromDate:self.lastRecordDate];
+    NSString *lastRecordString = self.lastRecordDate?[dateFormatter stringFromDate:self.lastRecordDate]:nil;
     
     NSString *hitLabelText = lastRecordString ?[NSString stringWithFormat:@"上次记录时间: %@", lastRecordString]: @"暂无记录！";
     self.hitLabel.text = [self isToday]? @"今天已经记录，继续坚持哟！": hitLabelText;
@@ -60,9 +64,18 @@
     }
 }
 
+- (void)pushSettingVC{
+    SettingViewController *settingVC = [SettingViewController new];
+    [self.navigationController pushViewController:settingVC animated:YES];
+}
+
 - (BOOL)isToday{
-    NSCalendar *calendar = [NSCalendar currentCalendar];
-    return [calendar isDateInToday:self.lastRecordDate];
+    if (self.lastRecordDate) {
+        NSCalendar *calendar = [NSCalendar currentCalendar];
+        return [calendar isDateInToday:self.lastRecordDate];
+    }
+    
+    return NO;
 }
 
 - (NSMutableAttributedString *)recordAttributedString{
@@ -80,7 +93,9 @@
     }
    
     self.recordCount += 1;
-    self.recordLabel.attributedText = [self recordAttributedString];
+
     [[NSUserDefaults standardUserDefaults] setValue:[NSDate date] forKey:LAST_RECORD_DATE];
+    self.lastRecordDate = [NSDate date];
+    [self configUI];
 }
 @end
