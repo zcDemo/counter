@@ -9,8 +9,7 @@
 #import "ViewController.h"
 #import "SettingViewController.h"
 
-#define RECORD_COUNT        @"RECORD_COUNT"
-#define LAST_RECORD_DATE    @"LAST_RECORD_DATE"
+
 
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *recordLabel;
@@ -28,15 +27,18 @@
     [super viewDidLoad];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(configUI) name:UIApplicationDidBecomeActiveNotification object:nil];
-    UIBarButtonItem *barBtn = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Home_item_icon.png"] style:UIBarButtonItemStylePlain target:self action:@selector(pushSettingVC)];
-    self.navigationItem.rightBarButtonItem = barBtn;
     
-    NSNumber *count = [[NSUserDefaults standardUserDefaults] objectForKey:RECORD_COUNT];
-    self.recordCount = (count != nil) ? count.integerValue : 0;
-    self.lastRecordDate = [[NSUserDefaults standardUserDefaults] objectForKey:LAST_RECORD_DATE];
+
     
     self.recordBtn.layer.cornerRadius = self.recordBtn.bounds.size.height / 2;
     self.recordBtn.layer.masksToBounds = YES;
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    NSNumber *count = [[NSUserDefaults standardUserDefaults] objectForKey:RECORD_COUNT];
+    self.recordCount = (count != nil) ? count.integerValue : 0;
+    self.lastRecordDate = [[NSUserDefaults standardUserDefaults] objectForKey:LAST_RECORD_DATE];
     [self configUI];
 }
 

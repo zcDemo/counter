@@ -62,7 +62,13 @@
                             <constraint firstAttribute="trailingMargin" secondItem="52p-uc-w0H" secondAttribute="trailing" constant="10" id="oqA-c0-nkT"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="记录" id="6ZC-x9-M0Q"/>
+                    <navigationItem key="navigationItem" title="记录" id="6ZC-x9-M0Q">
+                        <barButtonItem key="rightBarButtonItem" image="Home_item_icon.png" id="lKl-Co-s3n">
+                            <connections>
+                                <segue destination="LoN-ef-lua" kind="push" id="zCg-mF-fAu"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="hitLabel" destination="vI4-Vc-hXq" id="gpM-yH-lDx"/>
                         <outlet property="recordBtn" destination="rdp-4u-mGr" id="1xd-nT-UE8"/>
@@ -72,6 +78,35 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-751.20000000000005" y="-468.21589205397305"/>
+        </scene>
+        <!--设置-->
+        <scene sceneID="qwt-yD-EZ4">
+            <objects>
+                <viewController id="LoN-ef-lua" customClass="SettingViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="vnD-2z-RS7"/>
+                        <viewControllerLayoutGuide type="bottom" id="OD9-bQ-ilf"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="pG8-hB-xgr">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9OF-c8-x2z">
+                                <rect key="frame" x="156" y="152" width="62" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="清除记录"/>
+                                <connections>
+                                    <action selector="clearRecordBtnAction:" destination="LoN-ef-lua" eventType="touchUpInside" id="5ER-Ui-f0O"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="设置" id="mBv-y1-e7e"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Vry-h2-uyR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="10" y="-468"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="6gp-Fi-FSY">
@@ -90,4 +125,7 @@
             <point key="canvasLocation" x="-1481" y="-468"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Home_item_icon.png" width="30" height="26"/>
+    </resources>
 </document>

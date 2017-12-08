@@ -8,6 +8,7 @@
 
 #import "SettingViewController.h"
 
+
 @interface SettingViewController ()
 
 @end
@@ -17,6 +18,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+
+    
+}
+
+- (IBAction)clearRecordBtnAction:(id)sender {
+    
+    
+    
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:LAST_RECORD_DATE];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:RECORD_COUNT];
 }
 
 @end
